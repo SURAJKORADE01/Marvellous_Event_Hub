@@ -1,0 +1,98 @@
+<div class="row mt-5">
+  <div class="col-md-4 mb-3" *ngFor="let event of specialEvents">
+    <div class="card text-center">
+      <div class="card-body">
+        <h5 class="card-title">{{event.name}}</h5>
+        <p class="card-text">{{event.description}}</p>
+        <a href="#" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#takeadmission" (click) = "batchName(event.name)">Take Admission</a>
+      </div>
+      <div class="card-footer text-muted">
+        {{event.Teacher}}
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="takeadmission" tabindex="-1" aria-labelledby="addDataLabel" aria-hidden="true" (hidden.bs.modal)="resetForm()">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addDataLabel">Enter your information</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form [formGroup]="formValue">
+            <div class="mb-3">
+              <label class="form-label">First Name<span style="color: red;">*</span></label>
+              <input [class.is-invalid]="formValue.get('first')?.invalid && formValue.get('first')?.touched" type="text" class="form-control" formControlName="first" placeholder="Enter your first name">
+              
+              <div *ngIf="formValue.get('first')?.hasError('pattern') && formValue.get('first')?.touched" class="text-danger">
+                First name must only contain uppercase or lowercase letters.
+              </div>
+              
+              <div *ngIf = "formValue.get('first')?.hasError('required') && formValue.get('first')?.touched" class="text-danger">
+                First name is required.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Last Name<span style="color: red;">*</span></label>
+              <input [class.is-invalid]="formValue.get('last')?.invalid && formValue.get('last')?.touched" type="text" class="form-control" formControlName="last" placeholder="Enter your last name">
+              
+              <div *ngIf="formValue.get('last')?.hasError('pattern') && formValue.get('last')?.touched" class="text-danger">
+                Last name must only contain uppercase or lowercase letters.
+              </div>
+              
+              <div *ngIf = "formValue.get('last')?.hasError('required') && formValue.get('last')?.touched" class="text-danger">
+                Last name is required.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label  class="form-label">Email Address<span style="color: red;">*</span></label>
+              <input [class.is-invalid] = "formValue.get('email')?.invalid && formValue.get('email')?.touched" type="email" class="form-control" formControlName="email"  placeholder="abcd@gmail.com">
+            
+              <div *ngIf = "formValue.get('email')?.hasError('required') && formValue.get('email')?.touched" class="text-danger">
+                Email is required.
+              </div>
+
+              <div *ngIf="formValue.get('email')?.hasError('pattern') && formValue.get('email')?.touched" class="text-danger">
+                Invalid email format.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Mobile Number <span style="color: red;">*</span></label>
+              <input [class.is-invalid]="formValue.get('mobile')?.invalid && formValue.get('mobile')?.touched" type="text" class="form-control" formControlName="mobile"  placeholder="Enter mobile number">
+          
+              <div *ngIf="formValue.get('mobile')?.hasError('required') && formValue.get('mobile')?.touched" class="text-danger">
+                Mobile number is required.
+              </div>
+              <div *ngIf = "(formValue.get('mobile')?.hasError('minlength') || formValue.get('mobile')?.hasError('maxlength')) && formValue.get('mobile')?.touched" class="text-danger">
+                Mobile number must be exactly 10 digits long.
+              </div>
+
+              <div *ngIf="formValue.get('mobile')?.hasError('pattern') && formValue.get('mobile')?.touched" class="text-danger">
+                Mobile number must contain only digits.
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Registration ID <span style="color: red;">*</span></label>
+              <input [class.is-invalid]="formValue.get('rid')?.invalid && formValue.get('rid')?.touched" type="text" class="form-control" formControlName="rid"  placeholder="Enter your previous event registration ID">
+          
+              <div *ngIf="formValue.get('rid')?.hasError('required') && formValue.get('rid')?.touched" class="text-danger">
+                Registration ID is required.
+              </div>
+            </div>
+
+          </form>
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="Register()">Register</button>
+      </div>
+    </div>
+  </div>
+</div>

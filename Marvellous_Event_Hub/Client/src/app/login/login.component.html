@@ -1,0 +1,33 @@
+<div class="py-5">
+  <div class="row">
+    <div class="col-md-6 mx-auto">
+      <div class="card rounded-0">
+        <div class="card-header">
+          <h3 class="mb-0">Marvellous Infosystems Member Login</h3>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="loginForm">
+            <div class="form-group">
+              <label for="uname1">Marvellous Member Name: (USERNAME) <span style="color: red;">*</span></label>
+              <input id="uname1" type="text" class="form-control rounded-0" formControlName="email" placeholder="Enter your email"/>
+              <div *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.invalid" class="text-danger">
+                <div *ngIf="loginForm.get('email')?.hasError('required')">Email is required.</div>
+              </div>
+            </div>
+            <br />
+            <div class="form-group">
+              <label for="password">Registration ID <span style="color: red;">*</span></label>
+              <input id="password" type="password" class="form-control rounded-0" formControlName="password" placeholder="Enter your password"/>
+
+              <div *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.invalid" class="text-danger">
+                <div *ngIf="loginForm.get('password')?.hasError('required')">Password is required.</div>
+              </div>
+            </div>
+            <br />
+            <button type="button" class="btn btn-success float-right" (click)="CheckCredentials()">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
